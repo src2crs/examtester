@@ -4,6 +4,15 @@ function src2report_init()
 
     src2report_base_dir = "."
     src2report_submission_dir = "submissions"
+    src2report_src_file_ext = ".go"
+end
+
+function src2report_set_base_dir(base_dir)
+    src2report_base_dir = base_dir
+end
+
+function src2report_set_submission_dir(submission_dir)
+    src2report_submission_dir = submission_dir
 end
 
 function src2report_add_task(dir, name)
@@ -22,10 +31,8 @@ end
 
 function src2report_print_task_reports(submission_dir)
     for _, entry in ipairs(src2report_tasks) do
-        local dir_name = src2report_escape_tex(entry.dir)
-        local task_file = src2report_task_path(submission_dir, dir_name)
+        local task_file = src2report_task_path(submission_dir, entry.dir)
         local task_name = src2report_escape_tex(entry.name)
-        print("Task directory: " .. task_file)
         src2report_print_task_report(task_name, task_file)
     end
 end
@@ -37,8 +44,7 @@ end
 
 function src2report_print_submission_reports()
     for _, entry in ipairs(src2report_students) do
-        local dir_name = src2report_escape_tex(entry.dir)
-        local submission_dir = src2report_submission_path(dir_name)
+        local submission_dir = src2report_submission_path(entry.dir)
         local student_name = src2report_escape_tex(entry.name)
         src2report_print_submission_report(student_name, submission_dir)
     end
@@ -49,7 +55,7 @@ function src2report_escape_tex(str)
 end
 
 function src2report_task_path(submission_dir, task_name)
-    return submission_dir .. "/" .. task_name .. "/" .. task_name .. ".tex"
+    return submission_dir .. "/" .. task_name .. "/" .. task_name .. src2report_src_file_ext
 end
 
 function src2report_submission_path(submission_dirname)
