@@ -1,0 +1,55 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{src2report}[2025/01/26 Src2Crs Sectioning for Reports]
+
+%%% Logic for managing lists of tasks and students. %%%
+
+% Add a task to the list of tasks.
+%
+% #1: The directory to include.
+% #2: The task number or name.
+\NewDocumentCommand{\addtask}{m m}{%
+  \directlua{ src2report_add_task("\luaescapestring{#1}", "#2") }
+}
+
+% Add a student to the list of studentss.
+%
+% #1: The directory to include.
+% #2: The task number or name.
+\NewDocumentCommand{\addstudent}{m m}{%
+  \directlua{ src2report_add_student("\luaescapestring{#1}", "#2") }
+}
+
+% Print all submission reports.
+\NewDocumentCommand{\printsubmissionreports}{}{%
+  \directlua{ src2report_print_submission_reports() }
+}
+
+% Include LUA file with function definitions and initialize the module.
+\directlua{ dofile("src2report.lua") }
+\directlua{ src2report_init() }
+
+
+
+%%% Typesetting headings, listings, etc. %%%
+
+% Default strings.
+\def\src@exam@submission@title{Submission}
+
+% Print the heading for a submission report.
+\NewDocumentCommand{\submissionreporthead}{m}{%
+  \section*{\src@exam@submission@title #1}
+}
+
+% Print the heading for a task.
+%
+% #1: The task number or name.
+% vlc #2: The file path to add a listing for.
+\NewDocumentCommand{\taskreport}{m m}{%
+  \subsection*{#1}
+  \begin{itemize}
+    \item \textbf{Task:} #1
+    \item \textbf{File:} \texttt{#2}
+  \end{itemize}
+}
+
+\endinput
