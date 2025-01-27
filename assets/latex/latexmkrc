@@ -1,11 +1,11 @@
 my $cwd = getcwd();
 
-$out_dir = "$cwd/build";
+$out_dir = "$cwd/report";
 $pdflatex = 'lualatex -interaction=nonstopmode';
 $pdf_mode = 1;
 $do_cd = 1;
 $clean_ext = 'snm nav synctex.gz';
 
 @default_files = (
-    "report",
+    "report.tex",
 );
