@@ -42,7 +42,9 @@ end
 
 function Report:print_submission_report(student_name, submission_dir)
     tex.sprint("\\submissionreporthead{" .. student_name .. "}")
+    tex.sprint("\\begin{multicols}{2}")
     self:print_task_reports(submission_dir)
+    tex.sprint("\\end{multicols}")
 end
 
 function Report:print_submission_reports()

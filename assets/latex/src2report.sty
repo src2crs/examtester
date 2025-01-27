@@ -1,10 +1,12 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{src2report}[2025/01/26 Src2Crs Sectioning for Reports]
+\ProvidesPackage{src2report}[2025/01/27 Src2Crs Sectioning for Reports]
 
 \RequirePackage{tcolorbox}
 \tcbuselibrary{skins}
 \tcbuselibrary{listingsutf8}
 \RequirePackage{bold-extra}
+
+\RequirePackage{multicol}
 
 \ExplSyntaxOn
 \keys_define:nn { listingcmds }{
@@ -80,19 +82,21 @@
 %%% Typesetting headings, listings, etc. %%%
 
 % Default strings.
-\def\src@report@submission@title{Submission}
+\def\src@report@exam@title{Exam}
 
 % Set the title for the submission reports.
 % (E.g. for use in different languages)
 %
 % #1: The title.
-\NewDocumentCommand{\setsubmissiontitle}{m}{%
-  \def\src@report@submission@title{#1}
+\NewDocumentCommand{\setexamtitle}{m}{%
+  \def\src@report@exam@title{#1}
 }
 
 % Print the heading for a submission report.
 \NewDocumentCommand{\submissionreporthead}{m}{%
-  \section*{\src@report@submission@title{} #1}
+  \cleardoublepage
+  \ihead{\textbf{\src@report@exam@title}}
+  \ohead{\textbf{#1}}
 }
 
 % Print the heading for a task.

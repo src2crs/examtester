@@ -1,4 +1,11 @@
-\documentclass{scrartcl}
+\documentclass[twoside]{scrartcl}
+
+% Seatup pages
+\usepackage[a4paper, landscape]{geometry}
+\geometry{top=2cm, bottom=1cm, left=1cm, right=1cm}
+\usepackage[headsepline]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+%\clearpairofpagestyles
 
 \usepackage{src2report}
 
@@ -7,7 +14,7 @@
 \setbasedir{..}
 \setsubmissiondir{abgaben}
 \settaskdir{aufgaben}
-\setsubmissiontitle{Abgabe:}
+\setexamtitle{Exam Report}
 
 % Automatically detect tasks and students.
 \parsefilesystem
