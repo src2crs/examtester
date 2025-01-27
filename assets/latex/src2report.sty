@@ -14,20 +14,23 @@
 \ExplSyntaxOff
 \ProcessKeyOptions
 
+% Include LUA file with function definitions.
+\directlua{ dofile("src2report.lua") }
+
 %%% Logic for managing lists of tasks and students. %%%
 
 % Set the base directory for the exam.
 %
 % #1: The base directory.
 \NewDocumentCommand{\setbasedir}{m}{%
-  \directlua{ src2report_set_base_dir("\luaescapestring{#1}") }
+  \directlua{ report:set_base_dir("\luaescapestring{#1}") }
 }
 
 % Set the directory name for the submissions.
 %
 % #1: The directory name.
 \NewDocumentCommand{\setsubmissiondir}{m}{%
-  \directlua{ src2report_set_submission_dir("\luaescapestring{#1}") }
+  \directlua{ report:set_submission_dir("\luaescapestring{#1}") }
 }
 
 % Add a task to the list of tasks.
@@ -35,7 +38,7 @@
 % #1: The directory to include.
 % #2: The task number or name.
 \NewDocumentCommand{\addtask}{m m}{%
-  \directlua{ src2report_add_task("\luaescapestring{#1}", "#2") }
+  \directlua{ report:add_task("\luaescapestring{#1}", "#2") }
 }
 
 % Add a student to the list of studentss.
@@ -43,18 +46,13 @@
 % #1: The directory to include.
 % #2: The task number or name.
 \NewDocumentCommand{\addstudent}{m m}{%
-  \directlua{ src2report_add_student("\luaescapestring{#1}", "#2") }
+  \directlua{ report:add_student("\luaescapestring{#1}", "#2") }
 }
 
 % Print all submission reports.
 \NewDocumentCommand{\printsubmissionreports}{}{%
-  \directlua{ src2report_print_submission_reports() }
+  \directlua{ report:print_submission_reports() }
 }
-
-% Include LUA file with function definitions and initialize the module.
-\directlua{ dofile("src2report.lua") }
-\directlua{ src2report_init() }
-
 
 
 %%% Typesetting headings, listings, etc. %%%
