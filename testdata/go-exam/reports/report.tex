@@ -6,15 +6,21 @@
 
 \setbasedir{..}
 \setsubmissiondir{abgaben}
+\settaskdir{aufgaben}
 \setsubmissiontitle{Abgabe:}
 
-\addtask{task_1}{Task 1}
-\addtask{task_2}{Exercise 2}
-\addtask{task_3}{Aufgabe 3}
+% Automatically detect tasks and students.
+\parsefilesystem
 
-\addstudent{student_1}{Student 1}
-\addstudent{student_2}{Student 2}
-\addstudent{student_3}{Student 3}
+% Or do it manually:
+
+%\addtask{task_1}{Task 1}
+%\addtask{task_2}{Exercise 2}
+%\addtask{task_3}{Aufgabe 3}
+%
+%\addstudent{student_1}{Student 1}
+%\addstudent{student_2}{Student 2}
+%\addstudent{student_3}{Student 3}
 
 \printsubmissionreports
 

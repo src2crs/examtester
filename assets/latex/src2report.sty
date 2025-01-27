@@ -26,11 +26,33 @@
   \directlua{ report:set_base_dir("\luaescapestring{#1}") }
 }
 
+% Set the directory name for the tasks.
+%
+% #1: The directory name.
+\NewDocumentCommand{\settaskdir}{m}{%
+  \directlua{ report:set_task_dir("\luaescapestring{#1}") }
+}
+
 % Set the directory name for the submissions.
 %
 % #1: The directory name.
 \NewDocumentCommand{\setsubmissiondir}{m}{%
   \directlua{ report:set_submission_dir("\luaescapestring{#1}") }
+}
+
+% Parse the filesystem for tasks.
+\NewDocumentCommand{\parsetasks}{}{%
+  \directlua{ report:parse_task_dirs() }
+}
+
+% Parse the filesystem for students.
+\NewDocumentCommand{\parsestudents}{}{%
+  \directlua{ report:parse_submission_dirs() }
+}
+
+% Parse the filesystem for tasks and students.
+\NewDocumentCommand{\parsefilesystem}{}{%
+  \directlua{ report:parse_filesystem() }
 }
 
 % Add a task to the list of tasks.
